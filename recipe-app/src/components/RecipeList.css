@@ -1,0 +1,14 @@
+.RecipeList-container{
+    width: auto;
+    margin: 20px auto;
+    overflow: auto;
+}
+
+.RecipeList-container ul {
+    list-style-type: none;
+}
+  
+.RecipeList-container li {
+  float: left;
+  margin: 10px; 
+}
