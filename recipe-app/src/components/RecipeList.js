@@ -6,7 +6,6 @@ class RecipeList extends Component{
     render(){
         return(
             <div>
-                <h1>All My favourites dishes</h1>
                 <div className="RecipeList-container">  
                     <ul>
                         <li><Recipe/></li>

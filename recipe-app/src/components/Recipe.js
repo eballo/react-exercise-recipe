@@ -19,14 +19,14 @@ class Recipe extends Component{
                     <div className="Recipe-card-body">
                         
                         <h2 className="Recipe-card-title">{this.props.title}</h2>
-                        <span class="Recipe-card-description subtle">{this.props.description}</span>
-                        <div class="Recipe-card-read">Read</div>
+                        <span className="Recipe-card-description subtle">{this.props.description}</span>
+                        <div className="Recipe-card-read">Read</div>
                             {this.props.ingredients.map((p) =>(
                                 <span className="subtle">{p} </span>
                             ))}
                     </div>
                 </div>
-                <div class="Recipe-card-shadow"></div>
+                <div className="Recipe-card-shadow"></div>
             </div>
             );
     }
