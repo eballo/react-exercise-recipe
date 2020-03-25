@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Menu.css'
 
 class Menu extends Component{
     render(){
@@ -8,7 +9,7 @@ class Menu extends Component{
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h1 class="navbar-brand">My Favourite Dishes</h1>
+                    <h1 class="navbar-brand menu-recipe-title">My Favourite Dishes</h1>
 
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">

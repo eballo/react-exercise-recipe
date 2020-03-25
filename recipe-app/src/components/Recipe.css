@@ -43,10 +43,11 @@
 }
 
 .Recipe-card-description {
+    text-align: justify;
     display: inline-block;
     font-weight: 200;
     line-height: 22px;
-    margin: 10px 0;
+    margin: 10px 10px;
 }
 
 .Recipe-card-read {
