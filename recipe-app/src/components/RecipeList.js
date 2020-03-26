@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './RecipeList.css';
 import Recipe from './Recipe.js';
+import Menu from './Menu.js';
 import axios from "axios";
 
 class RecipeList extends Component{
@@ -19,11 +20,13 @@ class RecipeList extends Component{
     render(){
         return(
             <div>
+                <Menu/>
                 <div className="RecipeList-container">  
                     <ul>
                         {this.state.recipes.map(j =>(
                             <li key={j.id}>
-                                <Recipe id={j.id} 
+                                <Recipe key={j.id} 
+                                        id={j.id} 
                                         name={j.name} 
                                         description={j.description} 
                                         ingredients={j.ingredients}/>

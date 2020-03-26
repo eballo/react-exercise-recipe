@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Recipe.css';
+import uuid from 'react-uuid'
 
 class Recipe extends Component{
     contructor(props){
@@ -14,9 +15,9 @@ class Recipe extends Component{
                         
                         <h2 className="Recipe-card-title">{this.props.name}</h2>
                         <span className="Recipe-card-description subtle">{this.props.description}</span>
-                        <div className="Recipe-card-read">Read</div>
+                        <div className="Recipe-card-read"><a href="/recipes/view/">Read</a></div>
                             {this.props.ingredients.map((p) =>(
-                                <span className="subtle">{p.name} </span>
+                                <span key={uuid()} className="subtle">{p.name} </span>
                             ))}
                     </div>
                 </div>
