@@ -22,7 +22,7 @@ class Recipe extends Component{
                         <span className="Recipe-card-description subtle">{this.props.description}</span>
                         <div className="Recipe-card-read">Read</div>
                             {this.props.ingredients.map((p) =>(
-                                <span className="subtle">{p} </span>
+                                <span className="subtle">{p.name} </span>
                             ))}
                     </div>
                 </div>
