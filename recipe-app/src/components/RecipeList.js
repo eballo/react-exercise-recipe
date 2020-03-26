@@ -22,7 +22,12 @@ class RecipeList extends Component{
                 <div className="RecipeList-container">  
                     <ul>
                         {this.state.recipes.map(j =>(
-                            <li><Recipe id={j.id} title={j.title} description={j.description} ingredients={j.ingredients}/></li>
+                            <li key={j.id}>
+                                <Recipe id={j.id} 
+                                        name={j.name} 
+                                        description={j.description} 
+                                        ingredients={j.ingredients}/>
+                            </li>
                         ))}
                     </ul>
                 </div>

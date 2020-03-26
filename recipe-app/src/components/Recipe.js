@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import './Recipe.css';
 
 class Recipe extends Component{
-    static defaultProps = {
-        id: 1,
-        title: "Pizza Motzarella",
-        description: "From Italy with love this is an awesome pizza that no one should miss",
-        ingredients: ["eggs", "oil", "salt"]
-    }
     contructor(props){
         this.super(props);
     }
@@ -18,7 +12,7 @@ class Recipe extends Component{
                 <div className="Recipe-card u-clearfix">
                     <div className="Recipe-card-body">
                         
-                        <h2 className="Recipe-card-title">{this.props.title}</h2>
+                        <h2 className="Recipe-card-title">{this.props.name}</h2>
                         <span className="Recipe-card-description subtle">{this.props.description}</span>
                         <div className="Recipe-card-read">Read</div>
                             {this.props.ingredients.map((p) =>(
