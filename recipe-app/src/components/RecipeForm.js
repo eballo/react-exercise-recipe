@@ -4,8 +4,6 @@ import Menu from './Menu.js';
 class RecipeForm extends Component{
     render(){
         return(
-            <div>
-                <Menu/>
                 <div >  
                 <form>
                     <label for="lname">recipe name:</label>
@@ -16,8 +14,7 @@ class RecipeForm extends Component{
                     <input name='ingredients' type='text' label='Ingredients (comma separated list)'/>
                 </form>
                 </div>
-            </div>
-        );
+            );
     }
 }
 

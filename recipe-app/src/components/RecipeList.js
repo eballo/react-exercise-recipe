@@ -2,25 +2,21 @@ import React, { Component } from 'react';
 import './RecipeList.css';
 import Recipe from './Recipe.js';
 import Menu from './Menu.js';
-import axios from "axios";
+import RecipeAPI from './RecipeAPI'
 
 class RecipeList extends Component{
     constructor(props){
         super(props);
         this.state = { recipes: [] };
     }
+
     async componentDidMount(){
-        //Load recipes
-        let res = await axios.get("http://localhost:8000/api/recipes/", {
-            headers:{ Accept: "application/json"}
-        });
-        
-        this.setState({ recipes: res.data})
+        let res = await RecipeAPI.getRecipes('recipes/');
+        this.setState({ recipes: res.data })
     }
+
     render(){
         return(
-            <div>
-                <Menu/>
                 <div className="RecipeList-container">  
                     <ul>
                         {this.state.recipes.map(j =>(
@@ -34,7 +30,6 @@ class RecipeList extends Component{
                         ))}
                     </ul>
                 </div>
-            </div>
             );
     }
 }
