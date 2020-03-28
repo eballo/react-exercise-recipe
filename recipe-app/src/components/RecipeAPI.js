@@ -12,7 +12,6 @@ class RecipeAPI {
         this.client = client;
     }
 
-
     handleSuccess(response) {
         return response;
     }
