@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import Menu from './Menu.js';
 
 class RecipeForm extends Component{
     render(){
         return(
-                <div >  
-                <form>
-                    <label for="lname">recipe name:</label>
-                    <input name='name' type='text' label='Name'/><br/>
-                    <label for="lname">description:</label>
-                    <input name='description' type='text' label='Description'/><br/>
-                    <label for="lname">Ingredients:</label>
-                    <input name='ingredients' type='text' label='Ingredients (comma separated list)'/>
-                </form>
+            <div className="RecipeView-container">
+                <div className="RecipeView-card u-clearfix">
+                    <div className="RecipeView-card-body">
+                    <form>
+                        <h2 className="RecipeView-card-title">
+                            <input name='name' type='text' label='Name'/><br/></h2>
+                        <span className="RecipeView-card-description">
+                            <input name='description' type='text' label='Description'/><br/>
+                        </span>
+                        <input name='ingredients' type='text' label='Ingredients (comma separated list)'/>
+                    </form>                    
+                    </div>
                 </div>
+            </div>
             );
     }
 }

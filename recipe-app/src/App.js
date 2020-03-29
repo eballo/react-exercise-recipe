@@ -32,9 +32,8 @@ class App extends Component {
           </Route>
           <Route exact path='/recipes/add' component={RecipeForm}/>
           <Route exact path='/recipes/edit' component={RecipeForm}/>
-          <Route exact path='/recipes/view/' component={RecipeView}/>
+          <Route exact path='/recipes/view/:id/' component={ props => <RecipeView recipes={this.state.recipes} id={props.match.params.id} />} />
           <Route exact path='/'><Redirect to="/recipes/list"/></Route>
-          // Add 404 redirect
         </Switch>
       </div>
     );
