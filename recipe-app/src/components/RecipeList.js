@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import './RecipeList.css';
 import Recipe from './Recipe.js';
-import RecipeAPI from './RecipeAPI'
 
 class RecipeList extends Component{
 
     constructor(props){
         super(props);
-    }
-
-    async componentDidMount(){
-        let res = await RecipeAPI.getRecipes('recipes/');
-        this.props.handleRecipeChange(res.data);
     }
 
     render(){

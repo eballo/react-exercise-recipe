@@ -20,7 +20,6 @@ class RecipeSearch extends Component{
                    value={this.state.query} 
                    onChange={this.handleChange}/>
             <button className="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-            <Link to={`/recipes/${this.state.query}`}>search!</Link>
             </form>
         );
     }

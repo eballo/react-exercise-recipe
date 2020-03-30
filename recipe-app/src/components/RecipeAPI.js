@@ -16,11 +16,16 @@ class RecipeAPI {
         return response;
     }
 
-    createRecipes(){
+    createRecipes(payload){
+        console.log('A new Recipe was created!');
+        console.log(payload);
 
     }
 
-    updateRecipe(id){
+    updateRecipe(id, payload){
+        console.log('The given recipe was updated!');
+        console.log(id);
+        console.log(payload);
 
     }
 
