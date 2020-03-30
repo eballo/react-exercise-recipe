@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import './RecipeList.css';
 import Recipe from './Recipe.js';
 
-class RecipeList extends Component{
 
-    constructor(props){
-        super(props);
-    }
+class RecipeList extends Component{
 
     render(){
         return(
@@ -18,7 +15,8 @@ class RecipeList extends Component{
                                         id={j.id} 
                                         name={j.name} 
                                         description={j.description} 
-                                        ingredients={j.ingredients}/>
+                                        ingredients={j.ingredients}
+                                        />
                             </li>
                         ))}
                     </ul>

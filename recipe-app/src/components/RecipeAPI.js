@@ -16,17 +16,18 @@ class RecipeAPI {
         return response;
     }
 
-    createRecipes(payload){
+    createRecipes(path, payload){
         console.log('A new Recipe was created!');
-        console.log(payload);
-
+        return this.client.post(path, payload)
+                .then(response => this.handleSuccess(response))
+                .catch(error => console.log(error));
     }
 
-    updateRecipe(id, payload){
+    updateRecipe(path, payload){
         console.log('The given recipe was updated!');
-        console.log(id);
-        console.log(payload);
-
+        return this.client.patch(path, payload)
+                .then(response => this.handleSuccess(response))
+                .catch(error => console.log(error));
     }
 
     getRecipes(path){
@@ -36,10 +37,13 @@ class RecipeAPI {
                .catch(error => console.log(error));
     }
 
-    deleteRecipe(id){
-
+    deleteRecipe(path){
+        console.log('Deleting Recipe')
+        return this.client.delete(path)
+               .then(response => this.handleSuccess(response))
+               .catch(error => console.log(error));
     }
     
   }
 
-  export default new RecipeAPI;
+  export default new RecipeAPI();

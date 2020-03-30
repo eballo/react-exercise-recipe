@@ -9,18 +9,18 @@ class RecipeView extends Component{
     }
     
     render(){
-        let id = this.props.id -1;
+        let recipe = this.props.recipes.find(r => r.id === this.props.id);
         return(
                 <div className="RecipeView-container">
                     <div className="RecipeView-card u-clearfix">
                         <div className="RecipeView-card-body">
-                            <h2 className="RecipeView-card-title">{this.props.recipes[id].name}</h2>
-                            <span className="RecipeView-card-description subtle">{this.props.recipes[id].description}</span><br/>
-                            {this.props.recipes[id].ingredients.map((p) =>(
+                            <h2 className="RecipeView-card-title">{recipe.name}</h2>
+                            <span className="RecipeView-card-description subtle">{recipe.description}</span><br/>
+                            {recipe.ingredients.map((p) =>(
                                 <span key={uuid()} className="subtle">{p.name} </span>
                             ))}
                             <div className="RecipeView-card-read">
-                                <Link to={'/recipes/edit/'+this.props.id+'/'}>Edit</Link>
+                                <Link to={'/recipes/edit/'+recipe.id+'/'}>Edit</Link>
                             </div>
                         </div>
                     </div>

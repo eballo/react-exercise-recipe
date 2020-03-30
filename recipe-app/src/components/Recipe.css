@@ -80,6 +80,15 @@
     z-index: -1;
 }
 
+.Recipe-card-delete {
+    float: right;
+    cursor: pointer;
+}
+
+.Recipe-card-delete:hover{
+    color:red;
+}
+
 .subtle {
     color: #aaa;
   }
