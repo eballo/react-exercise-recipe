@@ -15,7 +15,8 @@ class Recipe extends Component{
         let res = await RecipeAPI.deleteRecipe('recipes/'+this.props.id+'/');
         if(res?.status === 204){
           console.log('Successful delete');
-          //this.state.recipes.slice(this.state.recipes.find(r =>r.id === parseInt(id)))
+          let new_recipes = this.props.recipes.filter(recipe => recipe.id !== parseInt(this.props.id));
+          this.props.handleRecipeChange(new_recipes);
         }else{
           console.log('something went wrong while deleting');
         }    

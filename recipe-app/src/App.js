@@ -38,13 +38,21 @@ class App extends Component {
         <Menu handleRecipeChange={this.handleRecipeChange}/>
         <Switch>
           <Route exact path='/recipes/list'>
-            <RecipeList recipes={this.state.recipes} />
+            <RecipeList handleRecipeChange={this.handleRecipeChange} recipes={this.state.recipes} />
           </Route>
           <Route exact path='/recipes/add'>
-            <RecipeForm action="add"/>
+            <RecipeForm action="add" handleRecipeChange={this.handleRecipeChange} recipes={this.state.recipes} />
           </Route>
-          <Route exact path='/recipes/edit/:id/' component={ props => <RecipeForm action="edit" recipe={this.state.recipes.find(recipe => recipe.id === parseInt(props.match.params.id))} id={props.match.params.id} />} />
-          <Route exact path='/recipes/view/:id/' component={ props => <RecipeView recipes={this.state.recipes} id={parseInt(props.match.params.id)} />} />
+          <Route exact path='/recipes/edit/:id/' component={ props => 
+                  <RecipeForm handleRecipeChange={this.handleRecipeChange}
+                              recipes={this.state.recipes}
+                              action="edit" 
+                              recipe={this.state.recipes.find(recipe => recipe.id === parseInt(props.match.params.id))} 
+                              id={props.match.params.id} />} 
+          />
+          <Route exact path='/recipes/view/:id/' component={ props => 
+                  <RecipeView recipes={this.state.recipes} id={parseInt(props.match.params.id)} />}
+          />
           <Route exact path='/'><Redirect to="/recipes/list"/></Route>
         </Switch>
       </div>
