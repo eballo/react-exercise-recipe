@@ -38,7 +38,7 @@ class App extends Component {
         <Menu handleRecipeChange={this.handleRecipeChange}/>
         <Switch>
           <Route exact path='/recipes/list'>
-            <RecipeList recipes={this.state.recipes} handleRecipeDelete={this.handleRecipeDelete} />
+            <RecipeList recipes={this.state.recipes} />
           </Route>
           <Route exact path='/recipes/add'>
             <RecipeForm action="add"/>
