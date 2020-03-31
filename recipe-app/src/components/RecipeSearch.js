@@ -8,14 +8,7 @@ class RecipeSearch extends Component{
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.searchRecipes = this.searchRecipes.bind(this);
     }
-
-    async searchRecipes(){
-        let res = await RecipeAPI.getRecipes('recipes/?name='+this.state.query);
-        this.props.handleRecipeChange(res.data);
-    }
-
 
     handleChange(event){
         this.setState({ query : event.target.value });
@@ -23,7 +16,8 @@ class RecipeSearch extends Component{
 
     handleSubmit(event){
         event.preventDefault();
-        this.searchRecipes();
+        let path = 'recipes/?name='+this.state.query
+        this.props.searchRecipes(path);
     }
 
     render(){

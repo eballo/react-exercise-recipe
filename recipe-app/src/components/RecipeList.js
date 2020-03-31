@@ -17,7 +17,7 @@ class RecipeList extends Component{
                                         description={j.description} 
                                         ingredients={j.ingredients}
                                         handleRecipeChange={this.props.handleRecipeChange} 
-                                        recipes={this.props.recipes} 
+                                        handleRecipeDelete={this.props.handleRecipeDelete}
                                         />
                             </li>
                         ))}

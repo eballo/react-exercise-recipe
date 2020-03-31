@@ -6,6 +6,7 @@ import uuid from 'react-uuid'
 class RecipeView extends Component{
     
     render(){
+        
         if(!this.props.recipe){
             return <div><i className="fa fa-spinner" aria-hidden="true">L O A D I N G . . . </i></div>;
         }

@@ -20,7 +20,7 @@ class Menu extends Component{
                                 <Link to="/recipes/add">Add a New Dish!</Link>
                             </li>
                         </ul>
-                        <RecipeSearch handleRecipeChange={this.props.handleRecipeChange}/>
+                        <RecipeSearch searchRecipes={this.props.searchRecipes} />
                     </div>
                 </nav>
             </div>

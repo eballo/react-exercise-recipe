@@ -16,6 +16,28 @@ class App extends Component {
 
     this.handleRecipeChange = this.handleRecipeChange.bind(this);
     this.refreshRecipes = this.refreshRecipes.bind(this);
+    this.handleRecipeDelete = this.handleRecipeDelete.bind(this);
+    this.searchRecipes = this.searchRecipes.bind(this);
+  }
+
+  async searchRecipes(path){
+    let res = await RecipeAPI.getRecipes(path);
+    this.handleRecipeChange(res.data);
+  }
+
+  async refreshRecipes(){
+    let res = await RecipeAPI.getRecipes('recipes/');
+    this.handleRecipeChange(res.data);
+  }
+
+  async deleteRecipes(id){
+    let res = await RecipeAPI.deleteRecipe('recipes/'+id+'/');
+    if(res?.status === 204){
+      console.log('Successful delete');
+      this.refreshRecipes();
+    }else{
+      console.log('something went wrong while deleting');
+    }    
   }
 
   handleRecipeChange(recipes) {
@@ -24,9 +46,9 @@ class App extends Component {
     });
   }
 
-  async refreshRecipes(){
-    let res = await RecipeAPI.getRecipes('recipes/');
-    this.handleRecipeChange(res.data);
+  handleRecipeDelete(id){
+      console.log(id);
+      this.deleteRecipes(id);
   }
 
   componentDidMount(){
@@ -36,10 +58,10 @@ class App extends Component {
   render(){
     return (
       <div>
-        <Menu handleRecipeChange={this.handleRecipeChange}/>
+        <Menu searchRecipes={this.searchRecipes}/>
         <Switch>
           <Route exact path='/recipes/list'>
-            <RecipeList handleRecipeChange={this.handleRecipeChange} recipes={this.state.recipes} />
+            <RecipeList handleRecipeChange={this.handleRecipeChange} handleRecipeDelete={this.handleRecipeDelete} recipes={this.state.recipes} />
           </Route>
           <Route exact path='/recipes/add'>
             <RecipeForm action="add" refreshRecipes={this.refreshRecipes} />
