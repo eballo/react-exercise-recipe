@@ -15,6 +15,7 @@ class App extends Component {
     this.state = { recipes: [] };
 
     this.handleRecipeChange = this.handleRecipeChange.bind(this);
+    this.refreshRecipes = this.refreshRecipes.bind(this);
   }
 
   handleRecipeChange(recipes) {
@@ -23,13 +24,13 @@ class App extends Component {
     });
   }
 
-  async getRecipes(){
+  async refreshRecipes(){
     let res = await RecipeAPI.getRecipes('recipes/');
     this.handleRecipeChange(res.data);
   }
 
   componentDidMount(){
-    this.getRecipes();
+    this.refreshRecipes();
   }
 
   render(){
@@ -41,17 +42,16 @@ class App extends Component {
             <RecipeList handleRecipeChange={this.handleRecipeChange} recipes={this.state.recipes} />
           </Route>
           <Route exact path='/recipes/add'>
-            <RecipeForm action="add" handleRecipeChange={this.handleRecipeChange} recipes={this.state.recipes} />
+            <RecipeForm action="add" refreshRecipes={this.refreshRecipes} />
           </Route>
           <Route exact path='/recipes/edit/:id/' component={ props => 
-                  <RecipeForm handleRecipeChange={this.handleRecipeChange}
-                              recipes={this.state.recipes}
-                              action="edit" 
+                  <RecipeForm action="edit" 
+                              refreshRecipes={this.refreshRecipes}
                               recipe={this.state.recipes.find(recipe => recipe.id === parseInt(props.match.params.id))} 
                               id={props.match.params.id} />} 
           />
           <Route exact path='/recipes/view/:id/' component={ props => 
-                  <RecipeView recipes={this.state.recipes} id={parseInt(props.match.params.id)} />}
+                  <RecipeView recipe={this.state.recipes.find(r => r.id === parseInt(props.match.params.id))} />}
           />
           <Route exact path='/'><Redirect to="/recipes/list"/></Route>
         </Switch>

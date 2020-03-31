@@ -36,6 +36,7 @@ class RecipeForm extends Component{
         if(this.props.action === 'add'){
            res = await RecipeAPI.createRecipes('recipes/', this.getPayload());
            if(res?.status === 201){
+               this.props.refreshRecipes();
                this.setState({ redirect : true });
            }else{
                console.log('Something went wrong!')
@@ -44,6 +45,7 @@ class RecipeForm extends Component{
            res = await RecipeAPI.updateRecipe('recipes/'+(this.props.id)+'/', this.getPayload());
            console.log(res);
            if(res?.status === 200){
+                this.props.refreshRecipes();
                 this.setState({ redirect : true });
            }else{
                console.log('something went wrong!')
