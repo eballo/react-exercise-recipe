@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import './RecipeView.css';
+import '../styles/RecipeView.css';
 import uuid from 'react-uuid'
 
 function RecipeView(props){   
-//        if(!this.props.recipe){
-//            return <div><i className="fa fa-spinner" aria-hidden="true">L O A D I N G . . . </i></div>;
-//        }
+    if(!props.recipe){
+        return <div><i className="fa fa-spinner" aria-hidden="true">L O A D I N G . . . </i></div>;
+    }
     return(            
         <div className="RecipeView-container">
             <div className="RecipeView-card u-clearfix">

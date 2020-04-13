@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import './Recipe.css';
+import '../styles/Recipe.css';
 import uuid from 'react-uuid'
 
 function Recipe(props){

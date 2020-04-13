@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './RecipeList.css';
+import React from 'react';
+import '../styles/RecipeList.css';
 import Recipe from './Recipe.js';
 
 function RecipeList(props){

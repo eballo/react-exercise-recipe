@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import RecipeSearch from './RecipeSearch.js'
-import './Menu.css'
+import '../styles/Menu.css'
 
 function Menu(props) {  
     return(
