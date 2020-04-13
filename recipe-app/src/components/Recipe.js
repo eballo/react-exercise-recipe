@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import '../styles/Recipe.css';
 import uuid from 'react-uuid'
 
-function Recipe(props){
+export default function Recipe(props){
     return(
         <div className="Recipe-container">
             <div className="Recipe-card u-clearfix">
@@ -23,5 +23,3 @@ function Recipe(props){
         </div>
         );
 }
-
-export default Recipe;

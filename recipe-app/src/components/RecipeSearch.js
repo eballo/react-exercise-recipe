@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function RecipeSearch(props){
+export default function RecipeSearch(props){
     
     const [query, setQuery] = useState('');
 
@@ -27,5 +27,3 @@ function RecipeSearch(props){
     );
 
 }
-
-export default RecipeSearch;

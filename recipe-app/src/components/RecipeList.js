@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/RecipeList.css';
 import Recipe from './Recipe.js';
 
-function RecipeList(props){
+export default function RecipeList(props){
     return(
             <div className="RecipeList-container">  
                 <ul>
@@ -22,5 +22,3 @@ function RecipeList(props){
             </div>
         );
 }
-
-export default RecipeList;

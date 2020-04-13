@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import '../styles/RecipeView.css';
 import uuid from 'react-uuid'
 
-function RecipeView(props){   
+export default function RecipeView(props){   
     if(!props.recipe){
         return <div><i className="fa fa-spinner" aria-hidden="true">L O A D I N G . . . </i></div>;
     }
@@ -24,6 +24,4 @@ function RecipeView(props){
         </div>
     );
 }
-
-export default RecipeView;
 

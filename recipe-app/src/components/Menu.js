@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import RecipeSearch from './RecipeSearch.js'
 import '../styles/Menu.css'
 
-function Menu(props) {  
+export default function Menu(props) {  
     return(
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,5 +24,3 @@ function Menu(props) {
         </div>
     );
 }
-
-export default Menu;
