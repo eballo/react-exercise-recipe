@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
-import './RecipeList.css';
+import React from 'react';
+import '../styles/RecipeList.css';
 import Recipe from './Recipe.js';
 
+export default function RecipeList(props){
 
-class RecipeList extends Component{
-
-    render(){
-        return(
-                <div className="RecipeList-container">  
-                    <ul>
-                    {this.props.recipes.map(j =>(
-                            <li key={j.id}>
-                                <Recipe key={j.id} 
-                                        id={j.id} 
-                                        name={j.name} 
-                                        description={j.description} 
-                                        ingredients={j.ingredients}
-                                        handleRecipeChange={this.props.handleRecipeChange} 
-                                        handleRecipeDelete={this.props.handleRecipeDelete}
+    return(
+            <div className="RecipeList-container">  
+                <ul>
+                { props.recipes.map((recipe) => { 
+                    return (    
+                            <li key={recipe.id}>
+                                <Recipe key={recipe.id} 
+                                        id={recipe.id} 
+                                        name={recipe.name} 
+                                        description={recipe.description} 
+                                        ingredient={props.getIngredient(props.findRecipeById(recipe.id))}
+                                        handleRecipeChange={props.handleRecipeChange} 
+                                        handleRecipeDelete={props.handleRecipeDelete}
                                         />
                             </li>
-                        ))}
-                    </ul>
-                </div>
-            );
-    }
+                            );
+                    })
+                }
+                </ul>
+            </div>
+        );
 }
-
-export default RecipeList;

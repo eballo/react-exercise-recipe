@@ -1,117 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
-import RecipeAPI from './RecipeAPI'
+import useInputState from '../hooks/useInputState';
 
-class RecipeForm extends Component{
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            name: props.recipe?.name,
-            description: props.recipe?.description,
-            ingredients: props.recipe?.ingredients,
-            ingredient: this.getIngredients()?.toString(),
-            redirect: false
-        }
+export default function RecipeForm(props){
 
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeDesc = this.handleChangeDesc.bind(this);
-        this.handleChangeIng = this.handleChangeIng.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    const[id]                                   = useInputState(props.id);
+    const[name, handleChangeName]               = useInputState(props.recipe?.name);
+    const[description, handleChangeDescription] = useInputState(props.recipe?.description);
+    const[ingredient, handleChangeIngredient]   = useInputState(props.ingredient); 
+    const[action]                               = useInputState(props.action);    
 
-    getPayload(){
-        let payload = {
-            name: this.state.name,
-            description: this.state.description,
-            ingredients: this.state.ingredient?.split(',').map(ingredient => {
-              return { name: ingredient.trim() }
-            })
-          }
-        return payload;
-    }
-
-    async submit_from(){
-        let res;
-        if(this.props.action === 'add'){
-           res = await RecipeAPI.createRecipes('recipes/', this.getPayload());
-           if(res?.status === 201){
-               this.props.refreshRecipes();
-               this.setState({ redirect : true });
-           }else{
-               console.log('Something went wrong!')
-           }
-        }else if(this.props.action === 'edit'){
-           res = await RecipeAPI.updateRecipe('recipes/'+(this.props.id)+'/', this.getPayload());
-           console.log(res);
-           if(res?.status === 200){
-                this.props.refreshRecipes();
-                this.setState({ redirect : true });
-           }else{
-               console.log('something went wrong!')
-           }
-        }else{
-            console.log("WARNING: unknown action!")
-        }
-        return res;
-    }
-
-    handleChangeName(event){
-        this.setState({
-            name: event.target.value,
-        });
-    }
-
-    handleChangeDesc(event){
-        this.setState({
-            description: event.target.value,
-        });
-    }
-
-    handleChangeIng(event){
-        this.setState({
-            ingredient: event.target.value,
-        });
-    }
-
-    handleSubmit(event){
+    const handleSubmit = (event) => {
         event.preventDefault();
-        this.submit_from();
+        const data = {id, name, description, ingredient, action};
+        props.submit_from(data);
     }
 
-    getIngredients(){
-        return this.props.recipe?.ingredients.map((p) =>( p.name +" " ))
-    }
+    if (props.redirect) {
+        props.handleChangeRedirect(false);
+        return (<Redirect to='/recipes/list/'/>);
+    }  
 
-    render(){
+    return(
+        <div className="RecipeView-container">
+            <div className="RecipeView-card u-clearfix">
+                <div className="RecipeView-card-body">
+                    <div className="form-group">
 
-        if (this.state.redirect) {
-            return (<Redirect to='/recipes/list/'/>);
-        }  
+                        <form onSubmit={handleSubmit} >
 
-        return(
-            <div className="RecipeView-container">
-                <div className="RecipeView-card u-clearfix">
-                    <div className="RecipeView-card-body">
-                        <div className="form-group">
-                            <form onSubmit={this.handleSubmit} >
-                                <label htmlFor="nameImput">Recipe Name:</label>
-                                <input className="form-control" name='name' type='text' value={this.state.name} onChange={this.handleChangeName} placeholder="recipe name" />
-                                
-                                <label htmlFor="descriptionImput">Description:</label>
-                                <input className="form-control" name='description' type='text' value={this.state.description} onChange={this.handleChangeDesc} placeholder="short description" />
-                                
-                                <label htmlFor="ingredientsImput">Ingredients:</label>
-                                <input className="form-control" name='ingredient' type='text' value={this.state.ingredient} onChange={this.handleChangeIng} placeholder="coma separated list of ingredients"  />
-                                <br/>
-                                <input type="submit" value="Submit" className="btn btn-primary"/>
-                            </form>
-                        </div>                  
-                    </div>
+                            <label htmlFor="nameImput">Recipe Name:</label>
+                            <input className="form-control" 
+                                name='name' 
+                                type='text' 
+                                value={name} 
+                                onChange={handleChangeName} 
+                                placeholder="recipe name" />
+                            
+                            <label htmlFor="descriptionImput">Description:</label>
+                            <input className="form-control" 
+                                name='description' 
+                                type='text' 
+                                value={description} 
+                                onChange={handleChangeDescription} 
+                                placeholder="short description" />
+                            
+                            <label htmlFor="ingredientsImput">Ingredients:</label>
+                            <input className="form-control" 
+                                name='ingredient' 
+                                type='text' 
+                                value={ingredient} 
+                                onChange={handleChangeIngredient} 
+                                placeholder="coma separated list of ingredients"  />
+
+                            <br/>
+                            <input type="submit" value="Submit" className="btn btn-primary"/>
+                            
+                        </form>
+
+                    </div>                  
                 </div>
             </div>
-            );
-    }
+        </div>
+    );
 }
-
-export default RecipeForm;
