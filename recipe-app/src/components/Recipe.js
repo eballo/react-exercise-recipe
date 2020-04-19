@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import '../styles/Recipe.css';
-import uuid from 'react-uuid'
 
 export default function Recipe(props){
     return(
