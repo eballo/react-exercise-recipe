@@ -13,9 +13,7 @@ export default function RecipeView(props){
                 <div className="RecipeView-card-body">
                     <h2 className="RecipeView-card-title">{props.recipe.name}</h2>
                     <span className="RecipeView-card-description subtle">{props.recipe.description}</span><br/>
-                    {props.recipe.ingredients?.map((p) =>(
-                        <span key={uuid()} className="subtle">{p.name} </span>
-                    ))}
+                    <span key={uuid()} className="subtle">{props.ingredient} </span>
                     <div className="RecipeView-card-read">
                         <Link to={'/recipes/edit/'+props.recipe.id+'/'}>Edit</Link>
                     </div>

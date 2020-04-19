@@ -5,7 +5,7 @@ import RecipeForm from './components/RecipeForm.js';
 import RecipeView from './components/RecipeView.js';
 import RecipeAPI from './components/RecipeAPI.js'
 import useToggleState from './hooks/useToggleState';
-import './App.css';
+import './styles/App.css';
 import {Route, Switch, Redirect} from "react-router-dom"
 
 export default function App() {
@@ -62,10 +62,12 @@ export default function App() {
   }
 
   const getPayload = (data) =>{
+    var ingredient = data.ingredient.split(",");
+    var ingredients = ingredient.map( name => ({name}) );
     let payload = {
         name: data.name,
         description: data.description,
-        ingredients: []  //FIXME: fix the ingredients 
+        ingredients: ingredients,
       }
     return payload;
   }
@@ -80,8 +82,9 @@ export default function App() {
       }
   }  
 
-  const getIngredients = () => {
-    return recipes?.ingredients?.map((p) =>( p.name +" " ))
+  const getIngredient = (recipe) => {
+    var one_line = recipe?.ingredients?.map((p) =>( p.name )).join(", ");
+    return one_line;
   }
 
   const handleRecipeDelete = (id) => {
@@ -89,12 +92,20 @@ export default function App() {
       deleteRecipes(id);
   }
 
+  const findRecipeById = (id) => {
+    return recipes.find(recipe => recipe.id === parseInt(id))
+  }
+
   return (
     <div>
       <Menu searchRecipes={searchRecipes} />
       <Switch>
         <Route exact path='/recipes/list'>
-          <RecipeList handleRecipeChange={handleRecipeChange} handleRecipeDelete={handleRecipeDelete} recipes={recipes} />
+          <RecipeList handleRecipeChange={handleRecipeChange} 
+                      handleRecipeDelete={handleRecipeDelete}
+                      getIngredient={getIngredient}
+                      findRecipeById={findRecipeById} 
+                      recipes={recipes} />
         </Route>
         <Route exact path='/recipes/add'>
           <RecipeForm action="add" 
@@ -108,12 +119,15 @@ export default function App() {
                             submit_from={submit_from}
                             redirect={redirect}
                             handleChangeRedirect={handleChangeRedirect}
-                            recipe={recipes.find(recipe => recipe.id === parseInt(props.match.params.id))} 
-                            ingredient={getIngredients()}
-                            id={props.match.params.id} />} 
+                            recipe={findRecipeById(props.match.params.id)} 
+                            ingredient={getIngredient(findRecipeById(props.match.params.id))}
+                            id={props.match.params.id} />
+                } 
         />
         <Route exact path='/recipes/view/:id/' component={ props => 
-                <RecipeView recipe={recipes.find(r => r.id === parseInt(props.match.params.id))} />}
+                <RecipeView recipe={findRecipeById(props.match.params.id)} 
+                            ingredient={getIngredient(findRecipeById(props.match.params.id))} />
+              }
         />
         <Route exact path='/'><Redirect to="/recipes/list"/></Route>
         <Route exact path='/recipes/'><Redirect to="/recipes/list"/></Route>

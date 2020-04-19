@@ -14,9 +14,7 @@ export default function Recipe(props){
                     <div className="Recipe-card-read">
                         <Link to={'/recipes/view/'+props.id} >Read</Link>
                     </div>
-                        {props.ingredients.map((p) =>(
-                            <span key={uuid()} className="subtle">{p.name} </span>
-                        ))}
+                    <span className="subtle">{props.ingredient} </span>
                 </div>
             </div>
             <div className="Recipe-card-shadow"></div>

@@ -14,7 +14,7 @@ export default function RecipeList(props){
                                         id={recipe.id} 
                                         name={recipe.name} 
                                         description={recipe.description} 
-                                        ingredients={recipe.ingredients}
+                                        ingredient={props.getIngredient(props.findRecipeById(recipe.id))}
                                         handleRecipeChange={props.handleRecipeChange} 
                                         handleRecipeDelete={props.handleRecipeDelete}
                                         />
