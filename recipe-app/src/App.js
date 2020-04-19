@@ -11,19 +11,21 @@ import {Route, Switch, Redirect} from "react-router-dom"
 export default function App() {
   
   const[recipes, handleRecipeChange] = useState([]);
-  const[querySearch, handleQuerySearch] = useState('');
   const[redirect, handleChangeRedirect] = useToggleState(false);  
 
-  const componentDidMount = () =>{
-    this.refreshRecipes();
-  }
+  useEffect(()=>{
+    getRecipes();
+  },[]);
 
-  const searchRecipes = async(data) =>{
-    let res = await RecipeAPI.getRecipes(data);
+  const searchRecipes = async (event) =>{
+    event.preventDefault();
+    let query = event.target.elements.querySearch.value;
+    let path = 'recipes/?name='+query;
+    let res = await RecipeAPI.getRecipes(path);
     handleRecipeChange(res.data);
   }
 
-  const refreshRecipes = async () => {
+  const getRecipes = async () => {
     let res = await RecipeAPI.getRecipes('recipes/');
     handleRecipeChange(res.data);
   }
@@ -32,7 +34,7 @@ export default function App() {
     let res = await RecipeAPI.deleteRecipe('recipes/'+id+'/');
     if(res?.status === 204){
       console.log('Successful delete');
-      this.refreshRecipes();
+      getRecipes();
     }else{
       console.log('something went wrong while deleting');
     }    
@@ -41,7 +43,7 @@ export default function App() {
   const addRecipe = async (data) =>{
     let res = await RecipeAPI.createRecipes('recipes/', getPayload(data));
     if(res?.status === 201){
-        refreshRecipes();
+        getRecipes();
         handleChangeRedirect(true);
     }else{
         console.log('Something went wrong!')
@@ -52,7 +54,7 @@ export default function App() {
     let res = await RecipeAPI.updateRecipe('recipes/'+(data.id)+'/', getPayload(data));
     console.log(res);
     if(res?.status === 200){
-        refreshRecipes();
+        getRecipes();
         handleChangeRedirect(true);
     }else{
         console.log('something went wrong!')
@@ -89,7 +91,7 @@ export default function App() {
 
   return (
     <div>
-      <Menu searchRecipes={searchRecipes} handleQuerySearch={handleQuerySearch} querySearch={querySearch}/>
+      <Menu searchRecipes={searchRecipes} />
       <Switch>
         <Route exact path='/recipes/list'>
           <RecipeList handleRecipeChange={handleRecipeChange} handleRecipeDelete={handleRecipeDelete} recipes={recipes} />
@@ -114,6 +116,7 @@ export default function App() {
                 <RecipeView recipe={recipes.find(r => r.id === parseInt(props.match.params.id))} />}
         />
         <Route exact path='/'><Redirect to="/recipes/list"/></Route>
+        <Route exact path='/recipes/'><Redirect to="/recipes/list"/></Route>
       </Switch>
     </div>
   );

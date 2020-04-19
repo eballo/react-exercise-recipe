@@ -7,18 +7,21 @@ export default function RecipeList(props){
     return(
             <div className="RecipeList-container">  
                 <ul>
-                {props.recipes.map(j =>(
-                        <li key={j.id}>
-                            <Recipe key={j.id} 
-                                    id={j.id} 
-                                    name={j.name} 
-                                    description={j.description} 
-                                    ingredients={j.ingredients}
-                                    handleRecipeChange={props.handleRecipeChange} 
-                                    handleRecipeDelete={props.handleRecipeDelete}
-                                    />
-                        </li>
-                    ))}
+                { props.recipes.map((recipe) => { 
+                    return (    
+                            <li key={recipe.id}>
+                                <Recipe key={recipe.id} 
+                                        id={recipe.id} 
+                                        name={recipe.name} 
+                                        description={recipe.description} 
+                                        ingredients={recipe.ingredients}
+                                        handleRecipeChange={props.handleRecipeChange} 
+                                        handleRecipeDelete={props.handleRecipeDelete}
+                                        />
+                            </li>
+                            );
+                    })
+                }
                 </ul>
             </div>
         );

@@ -4,11 +4,11 @@ import useInputState from '../hooks/useInputState';
 
 export default function RecipeForm(props){
 
-    const[id, handleChangeId]                   = useInputState(props.id);
+    const[id]                   = useInputState(props.id);
     const[name, handleChangeName]               = useInputState(props.recipe?.name);
     const[description, handleChangeDescription] = useInputState(props.recipe?.description);
     const[ingredient, handleChangeIngredient]   = useInputState(props.ingredient); 
-    const[action, handleChangeAction]           = useInputState(props.action);    
+    const[action]           = useInputState(props.action);    
 
     const handleSubmit = (event) => {
         event.preventDefault();
