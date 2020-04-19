@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 
 export default function RecipeSearch(props){
     
-    const [query, setQuery] = useState('');
-
-    const handleChange = event => {
-        setQuery(event.target.value);
-    }
-
-    const handleSubmit = event => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        let path = 'recipes/?name='+query
+        let path = 'recipes/?name='+event.target.value
         props.searchRecipes(path);
     }
 
@@ -20,8 +14,8 @@ export default function RecipeSearch(props){
                 type="search" 
                 placeholder="Search" 
                 aria-label="Search" 
-                value={query} 
-                onChange={handleChange}/>
+                value={props.querySearch} 
+                onChange={props.handleQuerySearch}/>
         <button className="btn btn-outline-info my-2 my-sm-0" >Search</button>
         </form>
     );
