@@ -5,26 +5,18 @@ import Utils from '../utils/Utils.js'
 
 export default function Recipe(props){
 
-    const getImageLink = (imageLink) =>{
-        if(!imageLink){
-            console.log("No Image")
-            imageLink = "http://localhost:8000/media/uploads/recipe/a79ca1e4-b069-47f3-aaf6-a781cc6dbe80.png";
-        }
-        return imageLink;
-    }
-
     return(
         <div className="Recipe-container">
             <div className="Recipe-card u-clearfix">
                 <div className="Recipe-card-header">
 			        <div className="Recipe-card-header_overlay">
                         <span class="image">
-                            <img className="Recipe-image" src={getImageLink(props.image)} alt={props.name}/>
+                            <img className="Recipe-image" src={props.getImageLink(props.image)} alt={props.name}/>
                         </span>
                         <div className="row">
                             <div className="col Recipe-container-colums">
                                 <span class="price">{props.price} €</span>
-                                <span class="time">{props.time_minutes} min</span>
+                                <span class="time"><i class="fa fa-clock-o" aria-hidden="true"></i> {props.time_minutes} min</span>
                                 <span className="Recipe-card-tag">{props.tags} </span>
                             </div>
                         </div>

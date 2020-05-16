@@ -102,6 +102,14 @@ export default function App() {
     return recipes.find(recipe => recipe.id === parseInt(id))
   }
 
+  const getImageLink = (imageLink) =>{
+    if(!imageLink){
+        console.log("No Image")
+        imageLink = "http://localhost:8000/media/uploads/recipe/a79ca1e4-b069-47f3-aaf6-a781cc6dbe80.png";
+    }
+    return imageLink;
+}
+
   return (
     <div>
       <Menu searchRecipes={searchRecipes} />
@@ -112,6 +120,7 @@ export default function App() {
                       getIngredient={getIngredient}
                       getTags={getTags}
                       findRecipeById={findRecipeById} 
+                      getImageLink={getImageLink}
                       recipes={recipes} />
         </Route>
         <Route exact path='/recipes/add'>
@@ -127,12 +136,15 @@ export default function App() {
                             redirect={redirect}
                             handleChangeRedirect={handleChangeRedirect}
                             recipe={findRecipeById(props.match.params.id)} 
+                            tags={getTags(findRecipeById(props.match.params.id))}
                             ingredient={getIngredient(findRecipeById(props.match.params.id))}
                             id={props.match.params.id} />
                 } 
         />
         <Route exact path='/recipes/view/:id/' component={ props => 
                 <RecipeView recipe={findRecipeById(props.match.params.id)} 
+                            tags={getTags(findRecipeById(props.match.params.id))}
+                            getImageLink={getImageLink}
                             ingredient={getIngredient(findRecipeById(props.match.params.id))} />
               }
         />

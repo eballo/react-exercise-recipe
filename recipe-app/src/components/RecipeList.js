@@ -19,6 +19,7 @@ export default function RecipeList(props){
                                         time_minutes={recipe.time_minutes}
                                         ingredient={props.getIngredient(props.findRecipeById(recipe.id))}
                                         tags={props.getTags(props.findRecipeById(recipe.id))}
+                                        getImageLink={props.getImageLink}
                                         handleRecipeChange={props.handleRecipeChange} 
                                         handleRecipeDelete={props.handleRecipeDelete}
                                         />
