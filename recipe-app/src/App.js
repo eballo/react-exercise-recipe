@@ -88,6 +88,11 @@ export default function App() {
     return one_line;
   }
 
+  const getTags = (recipe) => {
+    var one_line = recipe?.tags?.map((p) =>( p.name )).join(", ");
+    return one_line;
+  }
+
   const handleRecipeDelete = (id) => {
       console.log(id);
       deleteRecipes(id);
@@ -105,6 +110,7 @@ export default function App() {
           <RecipeList handleRecipeChange={handleRecipeChange} 
                       handleRecipeDelete={handleRecipeDelete}
                       getIngredient={getIngredient}
+                      getTags={getTags}
                       findRecipeById={findRecipeById} 
                       recipes={recipes} />
         </Route>
