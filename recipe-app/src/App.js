@@ -3,7 +3,7 @@ import Menu from './components/Menu.js';
 import RecipeList from './components/RecipeList.js';
 import RecipeForm from './components/RecipeForm.js';
 import RecipeView from './components/RecipeView.js';
-import RecipeAPI from './components/RecipeAPI.js'
+import RecipeAPI from './utils/RecipeAPI.js'
 import useToggleState from './hooks/useToggleState';
 import './styles/App.css';
 import {Route, Switch, Redirect} from "react-router-dom"
@@ -21,17 +21,18 @@ export default function App() {
     event.preventDefault();
     let query = event.target.elements.querySearch.value;
     let path = 'recipes/?name='+query;
-    let res = await RecipeAPI.getRecipes(path);
+    let res = await RecipeAPI.get(path);
     handleRecipeChange(res.data);
   }
 
   const getRecipes = async () => {
-    let res = await RecipeAPI.getRecipes('recipes/');
+    let res = await RecipeAPI.get('recipes/');
+    console.log(res);
     handleRecipeChange(res.data);
   }
 
   const deleteRecipes = async (id) => {
-    let res = await RecipeAPI.deleteRecipe('recipes/'+id+'/');
+    let res = await RecipeAPI.delete('recipes/'+id+'/');
     if(res?.status === 204){
       console.log('Successful delete');
       getRecipes();
@@ -41,7 +42,7 @@ export default function App() {
   }
 
   const addRecipe = async (data) =>{
-    let res = await RecipeAPI.createRecipes('recipes/', getPayload(data));
+    let res = await RecipeAPI.create('recipes/', getPayload(data));
     if(res?.status === 201){
         getRecipes();
         handleChangeRedirect(true);
@@ -51,7 +52,7 @@ export default function App() {
   }
 
   const updateRecipe = async (data) => {
-    let res = await RecipeAPI.updateRecipe('recipes/'+(data.id)+'/', getPayload(data));
+    let res = await RecipeAPI.update('recipes/'+(data.id)+'/', getPayload(data));
     console.log(res);
     if(res?.status === 200){
         getRecipes();
