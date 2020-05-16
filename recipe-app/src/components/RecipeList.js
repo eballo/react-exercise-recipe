@@ -15,6 +15,7 @@ export default function RecipeList(props){
                                         name={recipe.name} 
                                         description={recipe.description} 
                                         price={recipe.price}
+                                        image={recipe.image}
                                         time_minutes={recipe.time_minutes}
                                         ingredient={props.getIngredient(props.findRecipeById(recipe.id))}
                                         tags={props.getTags(props.findRecipeById(recipe.id))}
