@@ -10,13 +10,13 @@ export default function Recipe(props){
             <div className="Recipe-card u-clearfix">
                 <div className="Recipe-card-header">
 			        <div className="Recipe-card-header_overlay">
-                        <span class="image">
+                        <span className="image">
                             <img className="Recipe-image" src={props.getImageLink(props.image)} alt={props.name}/>
                         </span>
                         <div className="row">
                             <div className="col Recipe-container-colums">
-                                <span class="price">{props.price} €</span>
-                                <span class="time"><i class="fa fa-clock-o" aria-hidden="true"></i> {props.time_minutes} min</span>
+                                <span className="price">{props.price} €</span>
+                                <span className="time"><i className="fa fa-clock-o" aria-hidden="true"></i> {props.time_minutes} min</span>
                                 <span className="Recipe-card-tag">{props.tags} </span>
                             </div>
                         </div>

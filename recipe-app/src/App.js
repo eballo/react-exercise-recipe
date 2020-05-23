@@ -20,14 +20,13 @@ export default function App() {
   const searchRecipes = async (event) =>{
     event.preventDefault();
     let query = event.target.elements.querySearch.value;
-    let path = 'recipes/?name='+query;
+    let path = 'recipes/details/?name='+query;
     let res = await RecipeAPI.get(path);
     handleRecipeChange(res.data);
   }
 
   const getRecipes = async () => {
-    let res = await RecipeAPI.get('recipes/');
-    console.log(res);
+    let res = await RecipeAPI.get('recipes/details/');
     handleRecipeChange(res.data);
   }
 
@@ -94,7 +93,6 @@ export default function App() {
   }
 
   const handleRecipeDelete = (id) => {
-      console.log(id);
       deleteRecipes(id);
   }
 

@@ -18,7 +18,7 @@ export default function RecipeView(props){
                                 <div className="row">
                                     <div className="col Recipe-container-colums">
                                         <span className="price">{props.recipe.price} €</span>
-                                        <span className="time"><i class="fa fa-clock-o" aria-hidden="true"></i> {props.time_minutes} min</span>
+                                        <span className="time"><i className="fa fa-clock-o" aria-hidden="true"></i> {props.time_minutes} min</span>
                                         <span className="Recipe-card-tag">{props.tags} </span>
                                     </div>
                                 </div>
