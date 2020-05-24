@@ -1,6 +1,15 @@
 .menu-recipe-title{
     font-family: 'Permanent Marker', cursive;
-    font-size: 30px;
-    margin: 5px;
+    font-size: 25px;
     color: darkolivegreen;
+}
+
+.menu-recipe-title a{
+    text-decoration: none;
+    color: darkolivegreen;
+}
+
+.menu-recipe-title a:hover{
+    text-decoration: none;
+    color: darkgreen;
 }

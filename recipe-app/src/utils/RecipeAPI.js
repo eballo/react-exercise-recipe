@@ -16,29 +16,29 @@ class RecipeAPI {
         return response;
     }
 
-    createRecipes(path, payload){
-        console.log('A new Recipe was created!');
+    create(path, payload){
+        console.log('Creating..');
         return this.client.post(path, payload)
                 .then(response => this.handleSuccess(response))
                 .catch(error => console.log(error));
     }
 
-    updateRecipe(path, payload){
-        console.log('The given recipe was updated!');
+    update(path, payload){
+        console.log('Updating data..');
         return this.client.patch(path, payload)
                 .then(response => this.handleSuccess(response))
                 .catch(error => console.log(error));
     }
 
-    getRecipes(path){
-        console.log('Getting Recipes..')
+    get(path){
+        console.log('Getting data..')
         return this.client.get(path)
                .then(response => this.handleSuccess(response))
                .catch(error => console.log(error));
     }
 
-    deleteRecipe(path){
-        console.log('Deleting Recipe')
+    delete(path){
+        console.log('Deleting data..')
         return this.client.delete(path)
                .then(response => this.handleSuccess(response))
                .catch(error => console.log(error));

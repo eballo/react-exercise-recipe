@@ -3,7 +3,7 @@ import Menu from './components/Menu.js';
 import RecipeList from './components/RecipeList.js';
 import RecipeForm from './components/RecipeForm.js';
 import RecipeView from './components/RecipeView.js';
-import RecipeAPI from './components/RecipeAPI.js'
+import RecipeAPI from './utils/RecipeAPI.js'
 import useToggleState from './hooks/useToggleState';
 import './styles/App.css';
 import {Route, Switch, Redirect} from "react-router-dom"
@@ -20,18 +20,18 @@ export default function App() {
   const searchRecipes = async (event) =>{
     event.preventDefault();
     let query = event.target.elements.querySearch.value;
-    let path = 'recipes/?name='+query;
-    let res = await RecipeAPI.getRecipes(path);
+    let path = 'recipes/details/?name='+query;
+    let res = await RecipeAPI.get(path);
     handleRecipeChange(res.data);
   }
 
   const getRecipes = async () => {
-    let res = await RecipeAPI.getRecipes('recipes/');
+    let res = await RecipeAPI.get('recipes/details/');
     handleRecipeChange(res.data);
   }
 
   const deleteRecipes = async (id) => {
-    let res = await RecipeAPI.deleteRecipe('recipes/'+id+'/');
+    let res = await RecipeAPI.delete('recipes/'+id+'/');
     if(res?.status === 204){
       console.log('Successful delete');
       getRecipes();
@@ -41,7 +41,7 @@ export default function App() {
   }
 
   const addRecipe = async (data) =>{
-    let res = await RecipeAPI.createRecipes('recipes/', getPayload(data));
+    let res = await RecipeAPI.create('recipes/', getPayload(data));
     if(res?.status === 201){
         getRecipes();
         handleChangeRedirect(true);
@@ -51,7 +51,7 @@ export default function App() {
   }
 
   const updateRecipe = async (data) => {
-    let res = await RecipeAPI.updateRecipe('recipes/'+(data.id)+'/', getPayload(data));
+    let res = await RecipeAPI.update('recipes/'+(data.id)+'/', getPayload(data));
     console.log(res);
     if(res?.status === 200){
         getRecipes();
@@ -87,14 +87,26 @@ export default function App() {
     return one_line;
   }
 
+  const getTags = (recipe) => {
+    var one_line = recipe?.tags?.map((p) =>( p.name )).join(", ");
+    return one_line;
+  }
+
   const handleRecipeDelete = (id) => {
-      console.log(id);
       deleteRecipes(id);
   }
 
   const findRecipeById = (id) => {
     return recipes.find(recipe => recipe.id === parseInt(id))
   }
+
+  const getImageLink = (imageLink) =>{
+    if(!imageLink){
+        console.log("No Image")
+        imageLink = "http://localhost:8000/media/uploads/recipe/a79ca1e4-b069-47f3-aaf6-a781cc6dbe80.png";
+    }
+    return imageLink;
+}
 
   return (
     <div>
@@ -104,7 +116,9 @@ export default function App() {
           <RecipeList handleRecipeChange={handleRecipeChange} 
                       handleRecipeDelete={handleRecipeDelete}
                       getIngredient={getIngredient}
+                      getTags={getTags}
                       findRecipeById={findRecipeById} 
+                      getImageLink={getImageLink}
                       recipes={recipes} />
         </Route>
         <Route exact path='/recipes/add'>
@@ -120,12 +134,15 @@ export default function App() {
                             redirect={redirect}
                             handleChangeRedirect={handleChangeRedirect}
                             recipe={findRecipeById(props.match.params.id)} 
+                            tags={getTags(findRecipeById(props.match.params.id))}
                             ingredient={getIngredient(findRecipeById(props.match.params.id))}
                             id={props.match.params.id} />
                 } 
         />
         <Route exact path='/recipes/view/:id/' component={ props => 
                 <RecipeView recipe={findRecipeById(props.match.params.id)} 
+                            tags={getTags(findRecipeById(props.match.params.id))}
+                            getImageLink={getImageLink}
                             ingredient={getIngredient(findRecipeById(props.match.params.id))} />
               }
         />

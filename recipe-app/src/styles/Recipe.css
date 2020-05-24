@@ -13,6 +13,99 @@
     z-index: 1;
  }
 
+.Recipe-card-header {
+    width: 100%;
+    height: 160px;
+    background-position: center center;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.Recipe-card-header_overlay {
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	height: 9.75em;
+	width: 100%;
+	z-index: 4000;
+}
+.Recipe-container-colums{
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+.price {
+	color: white;
+	position: absolute;
+	top: 5px;
+	right: 80px;
+	background-color: darkkhaki;
+	font-size: 0.8125rem;
+	line-height: 1.5rem;
+    height: 1.5rem;
+    padding-left: 5px;
+    padding-right: 5px;
+	border-radius: 4px;
+	letter-spacing: .03em;
+	z-index: 5000;
+	text-transform: uppercase;
+	font-weight: 400;
+	box-shadow: 4px 6px 8px 0px rgba(46,61,73,0.2);
+}
+
+.time {
+	color: #fff;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+	background-color: thistle;
+	font-size: 0.8125rem;
+    line-height: 1.5rem;
+    padding-left: 5px;
+    padding-right: 5px;
+	height: 1.5rem;
+    border-radius: 4px;
+    border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	letter-spacing: .03em;
+	z-index: 5000;
+	font-weight: 400;
+	box-shadow: 4px 6px 8px 0px rgba(46,61,73,0.2);
+}
+
+.Recipe-card-tag{
+    position: absolute;
+    top: 5px;
+    color: white;
+	background-color: darkolivegreen;
+	font-size: 0.8125rem;
+	line-height: 1.5rem;
+    height: 1.5rem;
+    padding-left: 5px;
+    padding-right: 5px;
+	border-radius: 4px;
+	letter-spacing: .03em;
+	z-index: 5000;
+	text-transform: uppercase;
+	font-weight: 400;
+	box-shadow: 4px 6px 8px 0px rgba(46,61,73,0.2);
+}
+
+.Recipe-image{
+    border-radius: 45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 90%;
+    padding: 5px 0px;
+    height: 100%;
+}
+
+.card-title {
+	position: relative;
+}
+
+
 .Recipe-card-body {
     display: inline-block;
     width: 310px;
@@ -51,7 +144,6 @@
 }
 
 .Recipe-card-read {
-    cursor: pointer;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 6px;
@@ -59,6 +151,16 @@
     position: relative;
     text-align: right;
     text-transform: uppercase;
+}
+.Recipe-card-read a{
+    color:black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Recipe-card-read a:hover{
+    color: cornflowerblue;
+    text-decoration: none;
 }
 
 .Recipe-card-read:after {
@@ -92,3 +194,9 @@
 .subtle {
     color: #aaa;
   }
+
+.Recipe-card-delete{
+    color:black;
+    cursor: pointer;
+}
+  
