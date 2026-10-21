@@ -1,5 +1,5 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate } from 'react-router';
 import useInputState from '../hooks/useInputState';
 
 export default function RecipeForm(props){
@@ -16,9 +16,15 @@ export default function RecipeForm(props){
         props.submit_from(data);
     }
 
-    if (props.redirect) {
-        props.handleChangeRedirect(false);
-        return (<Redirect to='/recipes/list/'/>);
+    const { redirect, handleChangeRedirect } = props;
+    useEffect(() => {
+        if (redirect) {
+            handleChangeRedirect(false);
+        }
+    }, [redirect, handleChangeRedirect]);
+
+    if (redirect) {
+        return (<Navigate to='/recipes/list/'/>);
     }  
 
     return(

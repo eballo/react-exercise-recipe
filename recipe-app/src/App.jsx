@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Menu from './components/Menu.js';
-import RecipeList from './components/RecipeList.js';
-import RecipeForm from './components/RecipeForm.js';
-import RecipeView from './components/RecipeView.js';
+import Menu from './components/Menu.jsx';
+import RecipeList from './components/RecipeList.jsx';
+import RecipeForm from './components/RecipeForm.jsx';
+import RecipeView from './components/RecipeView.jsx';
 import RecipeAPI from './utils/RecipeAPI.js'
 import useToggleState from './hooks/useToggleState';
 import './styles/App.css';
-import {Route, Switch, Redirect} from "react-router-dom"
+import {Route, Routes, Navigate, useParams} from "react-router"
 
 export default function App() {
   
@@ -111,8 +111,8 @@ export default function App() {
   return (
     <div>
       <Menu searchRecipes={searchRecipes} />
-      <Switch>
-        <Route exact path='/recipes/list'>
+      <Routes>
+        <Route path='/recipes/list' element={
           <RecipeList handleRecipeChange={handleRecipeChange} 
                       handleRecipeDelete={handleRecipeDelete}
                       getIngredient={getIngredient}
@@ -120,36 +120,54 @@ export default function App() {
                       findRecipeById={findRecipeById} 
                       getImageLink={getImageLink}
                       recipes={recipes} />
-        </Route>
-        <Route exact path='/recipes/add'>
+        } />
+        <Route path='/recipes/add' element={
           <RecipeForm action="add" 
                       submit_from={submit_from}
                       redirect={redirect}
                       handleChangeRedirect={handleChangeRedirect}
                       />
-        </Route>
-        <Route exact path='/recipes/edit/:id/' component={ props => 
-                <RecipeForm action="edit" 
-                            submit_from={submit_from}
-                            redirect={redirect}
-                            handleChangeRedirect={handleChangeRedirect}
-                            recipe={findRecipeById(props.match.params.id)} 
-                            tags={getTags(findRecipeById(props.match.params.id))}
-                            ingredient={getIngredient(findRecipeById(props.match.params.id))}
-                            id={props.match.params.id} />
-                } 
-        />
-        <Route exact path='/recipes/view/:id/' component={ props => 
-                <RecipeView recipe={findRecipeById(props.match.params.id)} 
-                            tags={getTags(findRecipeById(props.match.params.id))}
-                            getImageLink={getImageLink}
-                            ingredient={getIngredient(findRecipeById(props.match.params.id))} />
-              }
-        />
-        <Route exact path='/'><Redirect to="/recipes/list"/></Route>
-        <Route exact path='/recipes/'><Redirect to="/recipes/list"/></Route>
-      </Switch>
+        } />
+        <Route path='/recipes/edit/:id/' element={
+          <RecipeEditRoute submit_from={submit_from}
+                           redirect={redirect}
+                           handleChangeRedirect={handleChangeRedirect}
+                           findRecipeById={findRecipeById}
+                           getTags={getTags}
+                           getIngredient={getIngredient} />
+        } />
+        <Route path='/recipes/view/:id/' element={
+          <RecipeViewRoute findRecipeById={findRecipeById}
+                           getTags={getTags}
+                           getImageLink={getImageLink}
+                           getIngredient={getIngredient} />
+        } />
+        <Route path='/' element={<Navigate replace to="/recipes/list"/>} />
+        <Route path='/recipes/' element={<Navigate replace to="/recipes/list"/>} />
+      </Routes>
     </div>
   );
 
+}
+
+function RecipeEditRoute({findRecipeById, getTags, getIngredient, ...props}) {
+  const {id} = useParams();
+  const recipe = findRecipeById(id);
+  // Remount once the recipe is loaded so the form picks up its initial values
+  return <RecipeForm key={recipe?.id ?? 'loading'}
+                     action="edit"
+                     {...props}
+                     recipe={recipe}
+                     tags={getTags(recipe)}
+                     ingredient={getIngredient(recipe)}
+                     id={id} />;
+}
+
+function RecipeViewRoute({findRecipeById, getTags, getIngredient, getImageLink}) {
+  const {id} = useParams();
+  const recipe = findRecipeById(id);
+  return <RecipeView recipe={recipe}
+                     tags={getTags(recipe)}
+                     getImageLink={getImageLink}
+                     ingredient={getIngredient(recipe)} />;
 }

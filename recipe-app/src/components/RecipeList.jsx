@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/RecipeList.css';
-import Recipe from './Recipe.js';
+import Recipe from './Recipe.jsx';
 
 export default function RecipeList(props){
 
