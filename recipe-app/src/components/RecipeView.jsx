@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import '../styles/RecipeView.css';
-import uuid from 'react-uuid'
 
 export default function RecipeView(props){   
     if(!props.recipe){
@@ -39,7 +38,7 @@ export default function RecipeView(props){
                             </div>
                         </span>
                     </div>
-                    <span key={uuid()} className="subtle">{props.ingredient} </span>
+                    <span className="subtle">{props.ingredient} </span>
                     <div className="RecipeView-card-read">
                         <Link to={'/recipes/edit/'+props.recipe.id+'/'}>Edit</Link>
                     </div>

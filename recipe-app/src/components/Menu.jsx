@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from "react-router-dom";
-import RecipeSearch from './RecipeSearch.js'
+import { Link } from "react-router";
+import RecipeSearch from './RecipeSearch.jsx'
 import '../styles/Menu.css'
 
 export default function Menu(props) {  
